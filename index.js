@@ -9,7 +9,7 @@ const paramCase = require('param-case')
  *
  *  Module Options:
  *   - srcDir    : STRING - content source directory
- *   - routeDir  : STRING - content parent route
+ *   - routePath  : STRING - content parent route
  *   - content   : ARRAY  - content type and configuation options
  *
  * Content Options:
@@ -24,7 +24,7 @@ const paramCase = require('param-case')
  *    modules: [
  *      [@nuxtjs/content, {
  *        srcDir: "content",
- *        routeDir: "blog"
+ *        routePath: "blog"
  *        content: ["posts", { permalink: ":title" }]
  *      }]
  *    ]
@@ -46,8 +46,8 @@ const paramCase = require('param-case')
   *    @note There cannot exist any dynamic route at same level of content route.
   *
   *  example: [
-  *    ["posts", { routeDir: "/" }],          // posts/HelloWorld -> /Helloworld
-  *    ["projects", { routeDir: "projects" }] // projects/Nuxt -> projects/Nuxt
+  *    ["posts", { routePath: "/" }],          // posts/HelloWorld -> /Helloworld
+  *    ["projects", { routePath: "projects" }] // projects/Nuxt -> projects/Nuxt
   *   ]
  *
  */
@@ -90,7 +90,7 @@ module.exports = function (options) {
  */
 function getContentOpts (config, options) {
   return {
-    route: join("/", config.routeDir || options.routeDir),
+    route: join("/", config.routePath || options.routePath),
     permalink: config.permalink || options.permalink,
     isPost: !(config.isPost === false)
   }
