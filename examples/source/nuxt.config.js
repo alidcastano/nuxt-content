@@ -1,4 +1,4 @@
-var nuxtContent = require('..index.js')
+var nuxtContent = require('../../index.js')
 
 module.exports = {
   head: {
@@ -26,6 +26,27 @@ module.exports = {
     }
   },
   modules: [
-    [nuxtContent, { srcDir: "content", routeDir: "/" }]
+    [nuxtContent, {
+      srcDir: "../content"
+    }]
+  ],
+  // TODO layout under preprocess
+  content: [
+    ["/", { // Top level files
+      isPost: false
+    }],
+    ["posts", { // Top Level Post-style Directory
+      permalink: ":year/:slug",
+      routePath: "/"
+    }],
+    ["posts/registered", { // Nested Registered Directory
+      permalink: ":section/:slug",
+      routePath: "/"
+    }],
+    ["projects", { // Top Level Non Post-Style Directiory
+      permalink: ":section/:slug",
+      routePath: "projects",
+      isPost: false
+    }]
   ]
 }
