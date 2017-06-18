@@ -25,9 +25,9 @@ Top Level Module Options:
   - `content`, Array that specifies options for all content under a directory.
 
 Content Directory Options:
-  - permalink, String that specifies path configuration options. The possible options
+  - `permalink`, String that specifies path configuration options. The possible options
   are `:slug`, `:section`, `:year`, `:month`, `:day`.
-  - isPost, Boolean that specifies where content requires a date.
+  - `isPost`, Boolean that specifies where content requires a date.
 
 ```js
 modules: [
