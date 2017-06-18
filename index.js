@@ -28,6 +28,7 @@ module.exports = function (options) {
   nuxt.router.extendRoutes = (routes, resolve) => {
     const contentData = getContentData(config)
     addRoutes(routes, contentData)
+    console.log(routes)
   }
 }
 
@@ -51,7 +52,7 @@ function getContentData (config) {
       if(fs.statSync(statPath).isDirectory()) { // Nested Files
         const dirSection = join(dir, stat)
         if (!(otherRegisteredDirs.indexOf(dirSection) > -1)) {
-          filesData.push(...getFilesData(dir, rootPath, otherRegisteredDirs))
+          filesData.push(...getFilesData(dirSection, rootPath, otherRegisteredDirs))
         }
       }
       else { // Top Level file
@@ -61,7 +62,7 @@ function getContentData (config) {
         })
       }
     })
-    contentData.push([opts, filesData])
+    contentData.push([dir, opts, filesData])
   })
   return contentData
 }
@@ -72,30 +73,33 @@ function getContentData (config) {
  */
 function addRoutes(routes, contentData) {
   contentData.forEach(type => {
-    const opts = type[0]
-    const filesData = type[1]
+    const dir = type[0]
+    const opts = type[1]
+    const filesData = type[2]
 
     if (opts.route === "/") { // Top level route
       filesData.forEach(file => {
         routes.push(createRoute(file, opts))
       })
     } else { // Nested route
+      let routeFound = false
       routes.forEach(route => {
         const isRoute = route.path.indexOf(opts.route) > -1
         if (isRoute) {
+          routeFound = true
           if (!route.children) route.children = []
           filesData.forEach(file => {
             route.children.push(createRoute(file, opts))
           })
         }
       })
+      if (!routeFound) throw Error(`${dir} route does not exists`)
     }
   })
-  console.log(routes)
 }
 
 
-/** // TODO /%2Fposts%2Fregistered/some-advice
+/**
  * Gets page data via 1) front-matter 2) file name.
  */
 function createRoute (file, options) {
@@ -109,7 +113,6 @@ function createRoute (file, options) {
     slug: paramCase(metadata.slug || toSlug(fileName)),
     section: file.section
   }
-
   if (options.isPost) {
     const dateData = fileDate[0].split('-')
     pathOpts.year = dateData[0]
@@ -117,11 +120,12 @@ function createRoute (file, options) {
     pathOpts.day = dateData[2]
   }
 
-  const toPath = pathToRegexp.compile(options.permalink || '/:slug')
+  const toPath = pathToRegexp.compile(options.permalink)
+  const permalink = toPath(pathOpts, { pretty: true })
+    .replace(/%2F/gi, "/") // url encoded slash pretty
 
   return {
-    // name: file.permalink,
-    path: join("/",  toPath(pathOpts, { pretty: true })),
+    path: join("/", permalink),
     component: file.src
   }
 }
@@ -158,7 +162,7 @@ function getFilesData (contentDir, rootPath, blacklist, filesData = []) {
     const statPath = join(contentPath, stat)
     if(fs.statSync(statPath).isDirectory()) {
       const nestedContentDir = join(contentDir, stat)
-      if (blacklist.indexOf(nestedContentDir) > -1) {
+      if (!(blacklist.indexOf(nestedContentDir) > -1)) {
         getFilesData(nestedContentDir, rootPath, blacklist, filesData)
       }
     } else {
