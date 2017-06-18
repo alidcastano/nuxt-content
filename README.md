@@ -34,7 +34,7 @@ Content Directory Options:
 modules: [
   [@nuxtjs/content, {
     srcDir: "content",
-    routeDir: "/"
+    routePath: "/"
     content: ["posts", {
       routerDir: "/",
       permalink: ":slug"
@@ -52,11 +52,11 @@ modules: [@nuxtjs/content, { srcDir: "content"} ]
 
 content: [
   ['posts', { // content/posts/2013-01-10-HelloWorld.md -> localhost:3000/2013/hello-world
-    routeDir: '/',
+    routePath: '/',
     permalink: ':year/:slug'
   }],
   ['projects', { // content/projects/NuxtContent.md -> localhost:3000/projects/nuxt-content
-    routeDir: 'projects',
+    routePath: 'projects',
     permalink: ':section/:slug',
     isPost: false
   }]
@@ -69,7 +69,7 @@ By default, page specific data is extracted from the file name, but it can also 
 ```js
 // `nuxt.config.js`
 content: ['posts', {
-  routeDir: '/',
+  routePath: '/',
   permalink: ':year/:slug'
 }]
 
