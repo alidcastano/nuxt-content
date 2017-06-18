@@ -17,5 +17,11 @@
     "Static"
   ],
   "author": "Alid Castano",
-  "license": "MIT "
+  "license": "MIT ",
+  "dependencies": {
+    "front-matter": "^2.1.2",
+    "param-case": "^2.1.1",
+    "path-to-regexp": "^1.7.0",
+    "vue-content-loader": "^0.1.0"
+  }
 }
