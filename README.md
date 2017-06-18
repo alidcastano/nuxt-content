@@ -21,7 +21,8 @@ the higher precedence it takes. Thus: a page's `front-matter` > a directory's op
 
 ### Module Options
 
-Configuration can be done inside `nuxt.config.js` via the modules property.
+Top level configurations can be done inside `nuxt.config.js` via the modules property
+when the plugin is installed.
 
 Top Level Module Options:
   - `srcDir`, String that specifies the directory where the content is located.
@@ -44,9 +45,9 @@ modules: [
 }
 ```
 
-### Content Options
+### Directory Options
 
-Content configurations can also be done under the `content` property,
+Directory specific configurations can also be done under the `content property`.
 
 Content Directory Options:
   - `permalink`, String that specifies url path configuration options. The possible options
@@ -79,7 +80,6 @@ Front Matter Options:
   -  `slug`, String that overrides the content's url identification name.
   - `permalink`, String that overrides the content's entire url path.
   -  `date`, Date that overrides the date the post is identified by, in YYYY-MM-DD format.
-
 
 ```js
 // `nuxt.config.js`
