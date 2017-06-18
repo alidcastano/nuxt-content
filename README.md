@@ -1,9 +1,8 @@
 # Nuxt Content Module
 
+Nuxt Content grabs all content in registered directory and converts each file into a Vue route component. The content's front-matter or the file name is used to automatically create the route data. 
 
-Grabs all content in registered directory and converts each file into a Vue route component.
-
-Nuxt Content uses `vue-content-loader` to convert markdown files with front-matter metadata into Vue components.
+(Nuxt Content uses `vue-content-loader` to convert markdown files with front-matter into Vue components.)
 
 ## Installation
 
@@ -65,7 +64,7 @@ content: [
 
 ```
 
-Page data is extracted from the file name, but can also be specified inside the front-matter of the respective file.
+By default, page specific data is extracted from the file name, but it can also be specified inside the front-matter of the respective file.
 
 ```js
 // `nuxt.config.js`
@@ -80,7 +79,7 @@ title: "My First Post!"
 permalink: "1st"
 ---
 
-# Hello World! 
+# Hello World!
 
 ```
 
