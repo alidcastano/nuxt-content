@@ -13,11 +13,11 @@ npm install nuxt-content
 
 ## Basic Setup
 
-Top level options can be specified under the options that are passed when the `module` is installed, content options can be specified under the `content` property, and page options
-can be specified in the file's `front-matter`.
+There are three places where options can be configured: top level options can be specified under the `module options` that are passed when the plugin is installed, directory options can be specified under the `content property`, and page options
+can be specified in the file's `front-matter`. See each section below for more details.
 
 For options that can be specified in multiple places, the more specific the location,
-the higher precedence it takes. Thus: `front-matter` > `content property` > `module options`.
+the higher precedence it takes. Thus: a page's `front-matter` > a directory's options under the `content property` > top level options under `module property`.
 
 ### Module Options
 
