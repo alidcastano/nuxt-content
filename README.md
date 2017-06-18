@@ -1,6 +1,6 @@
 # Nuxt Content Module
 
-Nuxt Content grabs all content in registered directory and converts each file into a Vue route component. The content's front-matter or the file name is used to automatically create the route data. 
+Nuxt Content grabs all content in registered directory and converts each file into a Vue route component. The content's front-matter or the file name is used to automatically create the route data.
 
 (Nuxt Content uses `vue-content-loader` to convert markdown files with front-matter into Vue components.)
 
@@ -13,22 +13,18 @@ npm install nuxt-content
 
 ## Basic Setup
 
+### Module Options
+
 Configuration can be done inside `nuxt.config.js` via the modules property.
 
-*Note: All paths are relative to Nuxt Root Directory.*
-
 Top Level Module Options:
-
   - `srcDir`, String that specifies the directory where the content is located.
   - `routePath`, String that specifies the parent route, which content will be nested under.
   If it is "/," then a top level route will be created.
   will be nested under it.
-  - `content`, Array that specifies options for all content under a directory.
+  - `content`, Array that specifies options for all content under a directory. A 2D array is also allowed to configure multiple content types.
 
-Content Directory Options:
-  - `permalink`, String that specifies path configuration options. The possible options
-  are `:slug`, `:section`, `:year`, `:month`, `:day`.
-  - `isPost`, Boolean that specifies whether the content requires a date.
+*Note: All paths are relative to Nuxt Root Directory.*
 
 ```js
 modules: [
@@ -43,8 +39,14 @@ modules: [
 }
 ```
 
+### Content Options
+
 Content configurations can also be done under the `content` property,
-and a 2D Array is also allowed multiple content types:
+
+Content Directory Options:
+  - `permalink`, String that specifies url path configuration options. The possible options
+  are `:slug`, `:section`, `:year`, `:month`, `:day`.
+  - `isPost`, Boolean that specifies whether the content requires a date.
 
 ```js
 
@@ -64,7 +66,15 @@ content: [
 
 ```
 
+### Page Options
+
 By default, page specific data is extracted from the file name, but it can also be specified inside the front-matter of the respective file.
+
+Front Matter Options:
+  -  `slug`, String that overrides the content's url identification name.
+  - `permalink`, String that overrides the content's entire url path.
+  -  `date`, Date that overrides the date the post is identified by, in YYYY-MM-DD format.
+
 
 ```js
 // `nuxt.config.js`
@@ -73,10 +83,10 @@ content: ['posts', {
   permalink: ':year/:slug'
 }]
 
-// content/posts/2014-05-10-MyFirstPost.md -> localhost:3000/1st
+// content/posts/2014-05-10-MyFirstPost.md -> localhost:3000/2014/1st
 ---
 title: "My First Post!"
-permalink: "1st"
+slug: "1st"
 ---
 
 # Hello World!

@@ -9,12 +9,13 @@ const paramCase = require('param-case')
  *
  *  Module Options:
  *   - srcDir    : STRING - content source directory
- *   - routePath  : STRING - content parent route
+ *   - routePath : STRING - content parent route
  *   - content   : ARRAY  - content type and configuation options
  *
  * Content Options:
- *   - permalink : STRING  - path configuration options
- *   - isPost    : BOOLEAN - if content is chronological
+ *   - slug      : STRING  - content url identifation name
+ *   - permalink : STRING  - content url path options
+ *   - isPost    : BOOLEAN - whether the content is chronological
  *
  *
  * Content configuration can be done via modules or content property.
