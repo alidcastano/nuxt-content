@@ -1,0 +1,21 @@
+{
+  "name": "@nuxtjs/content",
+  "version": "0.1.0",
+  "description": "Content Module for Nuxt.js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Nuxt.js",
+    "Vue.js",
+    "Content",
+    "Blog",
+    "Posts",
+    "Collections",
+    "Markdown",
+    "Static"
+  ],
+  "author": "Alid Castano",
+  "license": "MIT "
+}
