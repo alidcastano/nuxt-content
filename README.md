@@ -1,8 +1,8 @@
 # Nuxt Content Module
 
-Nuxt Content grabs all content in registered directory and converts each file into a Vue route component. The content's front-matter or the file name is used to automatically create the route data.
+Nuxt Content grabs all content in a registered directory and converts each file into a Nuxt route component. The content's front-matter or the file name is used to automatically create the route data.
 
-(Nuxt Content uses `vue-content-loader` to convert markdown files with front-matter into Vue components.)
+(Nuxt Content uses [vue-content-loader](https://github.com/alidcastano/vue-content-loader) to convert markdown files with front-matter into Vue components.)
 
 ## Installation
 
@@ -13,13 +13,19 @@ npm install nuxt-content
 
 ## Basic Setup
 
+Top level options can be specified under the options that are passed when the `module` is installed, content options can be specified under the `content` property, and page options
+can be specified in the file's `front-matter`.
+
+For options that can be specified in multiple places, the more specific the location,
+the higher precedence it takes. Thus: `front-matter` > `content property` > `module options`.
+
 ### Module Options
 
 Configuration can be done inside `nuxt.config.js` via the modules property.
 
 Top Level Module Options:
   - `srcDir`, String that specifies the directory where the content is located.
-  - `routePath`, String that specifies the parent route, which content will be nested under.
+  - `routePath`, String that specifies the parent route, which the content will be nested under. If routePath is "/" then a new route will be created for each file.
   If it is "/," then a top level route will be created.
   will be nested under it.
   - `content`, Array that specifies options for all content under a directory. A 2D array is also allowed to configure multiple content types.
@@ -32,7 +38,6 @@ modules: [
     srcDir: "content",
     routePath: "/"
     content: ["posts", {
-      routerDir: "/",
       permalink: ":slug"
     }]
   }]
