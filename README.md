@@ -1,11 +1,13 @@
 # Nuxt Content Module
 
-Automatically turns markdown files into Vue route components.
+
+Grabs all content in registered directory and converts each file into a Vue route component.
+
+Nuxt Content uses `vue-content-loader` to convert markdown files with front-matter metadata into Vue components.
 
 ## Installation
 
 ```
-
 npm install nuxt-content
 
 ```
@@ -27,14 +29,17 @@ Top Level Module Options:
 Content Directory Options:
   - `permalink`, String that specifies path configuration options. The possible options
   are `:slug`, `:section`, `:year`, `:month`, `:day`.
-  - `isPost`, Boolean that specifies where content requires a date.
+  - `isPost`, Boolean that specifies whether the content requires a date.
 
 ```js
 modules: [
   [@nuxtjs/content, {
     srcDir: "content",
     routeDir: "/"
-    content: ["posts"]
+    content: ["posts", {
+      routerDir: "/",
+      permalink: ":slug"
+    }]
   }]
 }
 ```
@@ -59,6 +64,26 @@ content: [
 ]
 
 ```
+
+Page data is extracted from the file name, but can also be specified inside the front-matter of the respective file.
+
+```js
+// `nuxt.config.js`
+content: ['posts', {
+  routeDir: '/',
+  permalink: ':year/:slug'
+}]
+
+// content/posts/2014-05-10-MyFirstPost.md -> localhost:3000/1st
+---
+title: "My First Post!"
+permalink: "1st"
+---
+
+# Hello World! 
+
+```
+
 
 ### License
 
